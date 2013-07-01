@@ -13,7 +13,7 @@ class Tag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("tag_index", kwargs={"pk":self.id})
+        return reverse("tag_index", kwargs={"pk": self.id})
 
     class Meta:
         verbose_name_plural = "tagy"
@@ -31,7 +31,7 @@ class Article(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("article_detail", kwargs={"pk":self.id})
+        return reverse("article_detail", kwargs={"pk": self.id})
 
     class Meta:
         verbose_name = "článek"
