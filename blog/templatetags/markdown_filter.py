@@ -1,6 +1,7 @@
 from django import template
 from django.template.defaultfilters import stringfilter
 import markdown
+from markdown_processor import CodeBlockExtension
 
 register = template.Library()
 
@@ -8,4 +9,4 @@ register = template.Library()
 @stringfilter
 def convertmarkdown(value):
     """Convert text from markdown to html."""
-    return markdown.markdown(value, output_format="html5")
+    return markdown.markdown(value, extensions=[CodeBlockExtension()])

@@ -1,3 +1,4 @@
 *.pyc
 .idea/*
 jansedlak/settings/secretsettings.py
+.DS_store
