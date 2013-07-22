@@ -2,14 +2,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jan Sedlák - student, programmer, open source enthusiast</title>
+    <title>Jan Sedlák</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
     <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
 <body>
     <div class="centered">
         <div id="name">Jan Sedlák</div><br/>
+        <div id="subtitle">student ● programmer</div><br/>
+        <div id="links">
+            <a href="">projects</a><hr>
+            <a href="{% url "blog_index" %}">blog</a><hr>
+            <a href="">contact</a>
+        </div>
     </div>
 </body>
 </html>
