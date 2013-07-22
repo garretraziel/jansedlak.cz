@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # Django settings for jansedlak project.
 
+import os
+BASE_DIR = os.path.join(os.path.dirname(__file__), "..", "..")
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -55,6 +58,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, "static"),
 )
 
 # List of finder classes that know how to find static files in
@@ -87,8 +91,7 @@ ROOT_URLCONF = 'jansedlak.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'jansedlak.wsgi.application'
 
-import os
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', '..', 'templates').replace('\\','/'),)
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates').replace('\\','/'),)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

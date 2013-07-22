@@ -1,0 +1,17 @@
+body {
+    background-color: #272822;
+}
+
+.centered {
+    max-width: 720px;
+	margin-left: auto;
+	margin-right: auto;
+    position: relative;
+	text-align: center;
+}
+
+#name {
+    font-family: 'Source Code Pro', sans-serif;
+    color: #66D9EF;
+    font-size: 100px;
+}
