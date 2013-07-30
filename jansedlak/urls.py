@@ -5,6 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'jansedlak.views.home', name='home'),
+    url(r'^contact/', 'jansedlak.views.contact', name='contact'),
     url(r'^blog/', include('blog.urls')),
 
 
