@@ -34,7 +34,7 @@ class TagListView(ListView):
         tag = get_object_or_404(Tag, pk=self.kwargs["pk"])
         return tag.article_set.all()
 
-    
+
 class AuthorListView(ListView):
     context_object_name = "articles"
     paginate_by = 5
@@ -49,9 +49,10 @@ class AuthorListView(ListView):
     def get_queryset(self):
         if User.objects.filter(username=self.kwargs["name"]).count() == 0:
             raise Http404
-        queryset = Article.objects.filter(published=True).filter(author__username=self.kwargs["name"]).order_by('-date_published')
+        queryset = Article.objects.filter(published=True).filter(author__username=self.kwargs["name"]).order_by(
+            '-date_published')
         return queryset
-        
+
 
 class ArticleDetailView(DetailView):
     context_object_name = "article"
@@ -63,7 +64,7 @@ class ArticleDetailView(DetailView):
         if not article.published and not self.request.user.has_perms('blog.add_article'):
             raise Http404
         return article
-    
+
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
         context["authors"] = User.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
