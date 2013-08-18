@@ -11,7 +11,7 @@ class BlogFeed(Feed):
     link = "/blog/"
 
     def items(self):
-        return Article.objects.order_by('-date_published')[:5]
+        return Article.objects.filter(published=True).order_by('-date_published')[:5]
 
     def item_title(self, item):
         return item.title

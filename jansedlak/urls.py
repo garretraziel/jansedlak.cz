@@ -9,9 +9,5 @@ urlpatterns = patterns('',
     url(r'^contact/', TemplateView.as_view(template_name="contact.html"), name='contact'),
     url(r'^blog/', include('blog.urls')),
 
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
     url(r'^admin/', include(admin.site.urls)),
 )

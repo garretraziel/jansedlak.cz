@@ -8,7 +8,7 @@
   {% for article in articles %}
   <div class="article">
     <a href="{{ article.get_absolute_url }}"><h1 class="leftblue">{{ article.title }}</h1></a><br>
-    <div class="article-text">{{ article.content|markdown|striptags|truncatewords_html:50 }}</div>
+    <div class="article-text">{{ article.content|markdown|safe|striptags|truncatewords_html:50 }}</div>
     <div class="tag-heading leftblue upper-offset">Tagy:</div>
     <a href="{% url "author_list" name=article.author %}" class="tag"><div class="tag red upper-offset">{{ article.author }}</div></a>
     {% for tag in article.tags.all %}
