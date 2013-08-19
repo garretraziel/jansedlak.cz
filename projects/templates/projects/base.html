@@ -1,0 +1,14 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static "projects/css/style.css" %}">
+        <meta charset="UTF-8">
+        <title>cz.jansedlak.projects.{% block name %}{% endblock %}</title>
+    </head>
+    <body>
+        <div id="mainwrapper">
+            {% block body %}{% endblock %}
+        </div>
+    </body>
+</html>
