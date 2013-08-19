@@ -1,9 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "projects/base_page.html" %}
 
-</body>
-</html>
+{% block title %}
+    <h1>{{ index_of }}</h1>
+{% endblock %}
+
+{% block body %}
+    {% for project in projects %}
+        <div class="project">
+            <div class="langs">
+                {% for lang in projects.languages %}
+                    <a href="{{ lang.get_absolute_url }}"
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

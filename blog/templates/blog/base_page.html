@@ -10,7 +10,7 @@
 {% block body%}
 {% endblock %}
 
-<div class="tailing">Alltagz:</div>
+<div class="tailing">All tags:</div>
 {% for author in authors %}
 <a href="{% url "author_list" name=author.username %}"><div class="tag red">{{ author }}</div></a>
 {% endfor %}
@@ -19,6 +19,6 @@
 {% endfor %}
 <div style="clear: both;"></div>
 
-<div class="tailing">Konečník:</div>
+<div class="tailing">Footer:</div>
 Jan Sedlák a Lukáš Brabec, léta páně 2013
 {% endblock %}

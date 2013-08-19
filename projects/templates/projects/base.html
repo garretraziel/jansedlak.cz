@@ -2,13 +2,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
         <link rel="stylesheet" type="text/css" href="{% static "projects/css/style.css" %}">
         <meta charset="UTF-8">
         <title>cz.jansedlak.projects.{% block name %}{% endblock %}</title>
     </head>
     <body>
         <div id="mainwrapper">
-            {% block body %}{% endblock %}
+            {% block content %}{% endblock %}
         </div>
     </body>
 </html>
