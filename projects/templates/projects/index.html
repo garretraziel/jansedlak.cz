@@ -8,9 +8,16 @@
     {% for project in projects %}
         <div class="project">
             <div class="langs">
-                {% for lang in projects.languages %}
-                    <a href="{{ lang.get_absolute_url }}"
+                {% for lang in project.languages.all %}
+                    <a href="{{ lang.get_absolute_url }}">{{ lang.name }}</a>
+                {% endfor %}
             </div>
+            <div class="tags">
+                {% for tag in project.tags.all %}
+                    <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
         </div>
     {% endfor %}
 {% endblock %}

@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class ProjectTag(models.Model):
@@ -9,6 +10,9 @@ class ProjectTag(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("project_tag", kwargs={"pk": self.id})
 
     class Meta:
         verbose_name = "tag"
@@ -21,6 +25,9 @@ class LanguageTag(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("language_tag", kwargs={"pk": self.id})
+
     class Meta:
         verbose_name = "jazyk"
         verbose_name_plural = "jazyky"
@@ -28,7 +35,7 @@ class LanguageTag(models.Model):
 
 class Project(models.Model):
     name = models.CharField("jméno", max_length=255)
-    url = models.URLField("project url")
+    url = models.URLField("odkaz")
     summary = models.TextField("souhrn")
 
     tags = models.ManyToManyField(ProjectTag, verbose_name="tagy")
@@ -36,6 +43,9 @@ class Project(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return self.url
 
     class Meta:
         verbose_name = "projekt"
