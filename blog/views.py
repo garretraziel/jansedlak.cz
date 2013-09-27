@@ -70,4 +70,3 @@ class ArticleDetailView(DetailView):
         context["authors"] = User.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
         context["tags"] = Tag.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
         return context
-        

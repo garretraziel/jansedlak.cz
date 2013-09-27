@@ -34,9 +34,10 @@ class LanguageTag(models.Model):
 
 
 class Project(models.Model):
-    name = models.CharField("jméno", max_length=255)
+    name = models.CharField("jméno", max_length=255, unique=True)
     url = models.URLField("odkaz")
     summary = models.TextField("souhrn")
+    tarball = models.FileField(upload_to=lambda instance, filename: "projects/"+filename)
 
     tags = models.ManyToManyField(ProjectTag, verbose_name="tagy")
     languages = models.ManyToManyField(LanguageTag, verbose_name="jazyky")
