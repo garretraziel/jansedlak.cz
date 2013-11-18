@@ -6,45 +6,36 @@ from django.contrib.auth.models import User
 from blog.models import Article, Tag
 
 
-class ArticleListView(ListView):
+class AuthorsTagsMixin(object):
+
+    def get_context_data(self, **kwargs):
+        context = super(AuthorsTagsMixin, self).get_context_data(**kwargs)
+        context["authors"] = User.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
+        context["tags"] = Tag.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
+        return context
+
+
+class ArticleListView(AuthorsTagsMixin, ListView):
     context_object_name = "articles"
     queryset = Article.objects.filter(published=True).order_by('-date_published')
     paginate_by = 5
     template_name = "blog/index.html"
 
-    def get_context_data(self, **kwargs):
-        context = super(ArticleListView, self).get_context_data(**kwargs)
-        context["authors"] = User.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
-        context["tags"] = Tag.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
-        return context
 
-
-class TagListView(ListView):
+class TagListView(AuthorsTagsMixin, ListView):
     context_object_name = "articles"
     paginate_by = 5
     template_name = "blog/index.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(TagListView, self).get_context_data(**kwargs)
-        context["authors"] = User.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
-        context["tags"] = Tag.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
-        return context
 
     def get_queryset(self):
         tag = get_object_or_404(Tag, pk=self.kwargs["pk"])
         return tag.article_set.all()
 
 
-class AuthorListView(ListView):
+class AuthorListView(AuthorsTagsMixin, ListView):
     context_object_name = "articles"
     paginate_by = 5
     template_name = "blog/index.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(AuthorListView, self).get_context_data(**kwargs)
-        context["authors"] = User.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
-        context["tags"] = Tag.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
-        return context
 
     def get_queryset(self):
         if User.objects.filter(username=self.kwargs["name"]).count() == 0:
@@ -54,7 +45,7 @@ class AuthorListView(ListView):
         return queryset
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(AuthorsTagsMixin, DetailView):
     context_object_name = "article"
     model = Article
     template_name = "blog/article.html"
@@ -66,9 +57,3 @@ class ArticleDetailView(DetailView):
         images = {image.title: image.image.url for image in article.articleimage_set.all()}
         article.content += "\n" + "\n".join(['[%s]: %s "%s"' % (title, url, title) for (title, url) in images.items()])
         return article
-
-    def get_context_data(self, **kwargs):
-        context = super(ArticleDetailView, self).get_context_data(**kwargs)
-        context["authors"] = User.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
-        context["tags"] = Tag.objects.annotate(num_articles=Count('article')).order_by('-num_articles')
-        return context
