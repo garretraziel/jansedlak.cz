@@ -54,6 +54,6 @@ class ArticleDetailView(AuthorsTagsMixin, DetailView):
         article = super(ArticleDetailView, self).get_object()
         if not article.published and not self.request.user.has_perms('blog.add_article'):
             raise Http404
-        images = {image.title: image.image.url for image in article.articleimage_set.all()}
-        article.content += "\n" + "\n".join(['[%s]: %s "%s"' % (title, url, title) for (title, url) in images.items()])
+        #images = {image.title: image.image.url for image in article.articleimage_set.all()}
+        #article.content += "\n" + "\n".join(['[%s]: %s "%s"' % (title, url, title) for (title, url) in images.items()])
         return article
