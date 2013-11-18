@@ -4,7 +4,7 @@
 
 {% block body %}
 <div id="content">
-  <div class="article">
+  <article>
     <h1 class="leftblue">{{ article.title }}</h1><br />
     <a href="{% url "author_list" name=article.author %}" class="tag"><div class="tag red upper-offset">{{ article.author }}</div></a>
     {% for tag in article.tags.all %}
@@ -13,6 +13,6 @@
     <br /><br />
     <p class="date">{{ article.date_published|date:"l, d. E Y" }}</p>
     <div class="article-text">{{ article.content|markdown|safe }}</div>
-  </div>
+  </article>
 </div>
 {% endblock %}

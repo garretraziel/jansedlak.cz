@@ -62,6 +62,7 @@ class CodeBlockPreprocessor(Preprocessor):
         joined_lines = self.pattern.sub(repl, joined_lines)
         return joined_lines.split("\n")
 
+
 class CodeBlockExtension(Extension):
     def extendMarkdown(self, md, md_globals):
         md.preprocessors.add('CodeBlockPreprocessor', CodeBlockPreprocessor(), '_begin')
