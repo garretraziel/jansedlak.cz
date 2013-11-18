@@ -1,5 +1,9 @@
 from django.contrib import admin
-from blog.models import Article, Tag
+from blog.models import Article, Tag, ArticleImage
+
+
+class ArticleImageInline(admin.TabularInline):
+    model = ArticleImage
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -9,10 +13,12 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display_links = ["title"]
     list_editable = ["published"]
     list_filter = ["published", "author", "tags", "date_published"]
+    inlines = [ArticleImageInline]
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         obj.save()
+
 
 class TagAdmin(admin.ModelAdmin):
     pass

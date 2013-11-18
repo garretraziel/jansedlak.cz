@@ -37,3 +37,18 @@ class Article(models.Model):
         verbose_name = "článek"
         verbose_name_plural = "články"
         ordering = ["-date_published", "title"]
+
+
+class ArticleImage(models.Model):
+    title = models.CharField("název", max_length=255)
+    image = models.ImageField(upload_to='images/%Y/%m/%d', height_field='height', width_field='width')
+    width = models.IntegerField(editable=False)
+    height = models.IntegerField(editable=False)
+    article = models.ForeignKey(Article)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "obrázek"
+        verbose_name_plural = "obrázky"
