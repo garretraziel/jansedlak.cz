@@ -13,7 +13,3 @@ class ProjectDetailView(DetailView):
     context_object_name = "project"
     model = Project
     template_name = "projects/detail.html"
-
-
-def project_fs(request, name, path):
-    pass
