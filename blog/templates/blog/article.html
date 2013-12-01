@@ -1,6 +1,6 @@
 {% extends "blog/base_page.html" %}
 {% load markdown_filter %}
-{% block page_title %}Hlavní chod{% endblock %}
+{% block page_title %}Hlavní chod {{ block.super }}{% endblock %}
 
 {% block body %}
 <div id="content">

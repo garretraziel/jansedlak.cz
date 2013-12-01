@@ -26,5 +26,5 @@ class ProjectTagListView(ProjectIndexMixin, ListView):
 
 class ProjectLanguageListView(ProjectIndexMixin, ListView):
     def get_queryset(self):
-        lang = get_object_or_404(ProjectTag, pk=self.args["pk"])
+        lang = get_object_or_404(LanguageTag, pk=self.args["pk"])
         return lang.project_set.all()
