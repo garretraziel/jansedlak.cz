@@ -1,18 +1,22 @@
-{% extends "blog/base_page.html" %}
+{% extends "blog/base.html" %}
 {% load markdown_filter %}
 {% block page_title %}Hlavní chod {{ block.super }}{% endblock %}
 
-{% block body %}
-<div id="content">
-  <div class="article">
-    <h1 class="leftblue">{{ article.title }}</h1><br />
-    <a href="{% url "author_list" name=article.author %}" class="tag"><div class="tag red upper-offset">{{ article.author }}</div></a>
-    {% for tag in article.tags.all %}
-    <a href="{{ tag.get_absolute_url }}" class="tag"><div class="tag green upper-offset">{{ tag }}</div></a>
-    {% endfor %}
-    <br /><br />
-    <p class="date">{{ article.date_published|date:"l, d. E Y" }}</p>
-    <div class="article-text">{{ article.content|markdown|safe }}</div>
-  </div>
-</div>
+{% block content %}
+    <div class="article">
+        <h1 class="leftblue">{{ article.title }}</h1><br/>
+        <a href="{% url "author_list" name=article.author %}" class="tag">
+            <div class="tag red upper-offset">{{ article.author }}</div>
+        </a>
+        {% for tag in article.tags.all %}
+            <a href="{{ tag.get_absolute_url }}" class="tag">
+                <div class="tag green upper-offset">{{ tag }}</div>
+            </a>
+        {% endfor %}
+        <br/><br/>
+
+        <p class="date">{{ article.date_published|date:"l, d. E Y" }}</p>
+
+        <div class="article-text">{{ article.content|markdown|safe }}</div>
+    </div>
 {% endblock %}
