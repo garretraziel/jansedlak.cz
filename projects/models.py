@@ -27,7 +27,7 @@ class LanguageTag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("language_tag", kwargs={"pk": self.id})
+        return reverse("project_language", kwargs={"pk": self.id})
 
     class Meta:
         verbose_name = "jazyk"
@@ -47,7 +47,7 @@ class Project(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return self.url
+        return reverse("project_root", kwargs={"pk": self.id})
 
     def clean(self):
         if self.url is None and self.tarball is None:

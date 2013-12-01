@@ -1,8 +1,6 @@
 {% extends "projects/base_page.html" %}
 
-{% block name %}
-{{ project.name }}
-{% endblock %}
+{% block name %}{{ project.name|slugify }}{% endblock %}
 
 {% block title %}
 {{ project.name }}
