@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.core.urlresolvers import reverse
 
@@ -26,7 +27,7 @@ class LanguageTag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("language_tag", kwargs={"pk": self.id})
+        return reverse("project_language", kwargs={"pk": self.id})
 
     class Meta:
         verbose_name = "jazyk"
@@ -35,7 +36,7 @@ class LanguageTag(models.Model):
 
 class Project(models.Model):
     name = models.CharField("jméno", max_length=255, unique=True)
-    url = models.URLField("odkaz")
+    url = models.URLField("odkaz", null=True, blank=True)
     summary = models.TextField("souhrn")
     tarball = models.FileField(upload_to=lambda instance, filename: "projects/"+filename, null=True, blank=True)
 
@@ -46,7 +47,11 @@ class Project(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return self.url
+        return reverse("project_root", kwargs={"pk": self.id})
+
+    def clean(self):
+        if self.url is None and self.tarball is None:
+            raise ValidationError("Musí být poskytnut tarball nebo link.")
 
     class Meta:
         verbose_name = "projekt"

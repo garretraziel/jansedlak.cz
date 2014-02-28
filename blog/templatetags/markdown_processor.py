@@ -45,7 +45,7 @@ from pygments.lexers import get_lexer_by_name, TextLexer
 
 class CodeBlockPreprocessor(Preprocessor):
 
-    pattern = re.compile(r'\[sourcecode:(.+?)\](.+?)\[/sourcecode\]', re.S)
+    pattern = re.compile(r'\[sourcecode:(.+?)](.+?)\[/sourcecode]', re.S)
 
     formatter = HtmlFormatter(noclasses=INLINESTYLES)
 

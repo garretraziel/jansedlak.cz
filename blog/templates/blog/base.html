@@ -1,18 +1,43 @@
+{% extends "base.html" %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <link href='https://fonts.googleapis.com/css?family=Alegreya+SC:400italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Cardo:400,400italic,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_rss" %}" />
+
+{% block head %}
+    {{ block.super }}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_rss" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "blog/css/style.css" %}">
-    <meta charset="UTF-8">
-    <title>{% block page_title %}{% endblock %} .::||::. Ultimate Hypergalactic Superblag</title>
-  </head>
-  <body>
+{% endblock %}
+
+{% block page_title %}.::||::. Ultimate Hypergalactic Superblag{% endblock %}
+
+{% block body %}
     <div id="mainwrapper">
-      {% block content %}{% endblock %}
+        {% block title %}
+            <div id="toplogo">Temporary Internet Files</div>
+            <div id="mainlogo"><a href="{% url "blog_index" %}">Sparrow <i>&</i> Raziel</a></div>
+            <div id="bottomlogo">Nakódeníčko a zápisníček</div>
+        {% endblock %}
+
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        {% include "pagination.html" %}
+
+        <div class="tailing">All tags:</div>
+        {% for author in authors %}
+            <a href="{% url "author_list" name=author.username %}">
+                <div class="tag red">{{ author }}</div>
+            </a>
+        {% endfor %}
+        {% for tag in tags %}
+            <a href="{{ tag.get_absolute_url }}">
+                <div class="tag green">{{ tag }}</div>
+            </a>
+        {% endfor %}
+        <div style="clear: both;"></div>
+
+        <div class="tailing">Footer:</div>
+        Jan Sedlák a Lukáš Brabec, léta páně 2013
     </div>
-  </body>
-</html>
+{% endblock %}

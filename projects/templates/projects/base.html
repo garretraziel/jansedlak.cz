@@ -1,15 +1,16 @@
+{% extends "base.html" %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-        <link rel="stylesheet" type="text/css" href="{% static "projects/css/style.css" %}">
-        <meta charset="UTF-8">
-        <title>cz.jansedlak.projects.{% block name %}{% endblock %}</title>
-    </head>
-    <body>
-        <div id="mainwrapper">
-            {% block content %}{% endblock %}
-        </div>
-    </body>
-</html>
+
+
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "projects/css/style.css" %}">
+{% endblock %}
+
+{% block page_title %}cz.jansedlak.projects.{% block name %}{% endblock %}{% endblock %}
+
+{% block body %}
+    <div id="mainwrapper">
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}Jan Sedlák{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+{% endblock %}
+
+{% block body %}
+    <div class="centered">
+        <div id="name">jan sedlák</div>
+        <br/>
+
+        <div id="subtitle">student ● programmer</div>
+        <br/>
+
+        <div id="links">
+            <a href="{% url "projects_index" %}">projects</a>
+            <hr>
+            <a href="{% url "contact" %}">contact</a>
+            <hr>
+            <a href="{% url "blog_index" %}">blog</a>
+        </div>
+    </div>
+{% endblock %}

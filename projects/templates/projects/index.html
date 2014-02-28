@@ -1,10 +1,10 @@
-{% extends "projects/base_page.html" %}
+{% extends "projects/base.html" %}
 
 {% block title %}
     <h1>{{ index_of }}</h1>
 {% endblock %}
 
-{% block body %}
+{% block content %}
     {% for project in projects %}
         <div class="project">
             <div class="langs">
